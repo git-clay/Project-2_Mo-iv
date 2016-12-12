@@ -4,16 +4,15 @@
 var db = require("./models");
 
 var userList =[
-	{  
-	}
+
 ];
 
 db.User.remove({}, function(err, doc){
 
-  db.User.create(userList, function(err, albums){
+  db.User.create(userList, function(err, users){
     if (err) { return console.log('ERROR', err); }
-    console.log("all albums:", albums);
-    console.log("created", albums.length, "albums");
+    console.log("all users:", users);
+    console.log("created", users.length, "users");
     process.exit();
   });
 

@@ -1,0 +1,30 @@
+<!--POSThttps://twinword-sentiment-analysis.p.mashape.com/analyze/
+curl -X POST --include 'https://twinword-sentiment-analysis.p.mashape.com/analyze/' \
+  -H 'X-Mashape-Key: EiFKUp9ROymshrUthQlrkwSWWM7lp1OsBRCjsno44Cct6gKP8V' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: application/json' \
+  -d 'text=great value in its price range!'-->
+
+
+<% include ./partials/header.ejs%>
+<form class="container-fluid col-md-offset-2" action="response.html">
+  <div class="form-group col-md-10">
+    <label> What has been on your mind today / General statement </label>
+    <textarea class="form-control" rows="3"></textarea>
+  </div>
+  <div class="form-group col-md-10">
+    <label>Q1 (from their registration)</label>
+    <textarea class="form-control" rows="3"></textarea>
+  </div>
+  <div class="form-group col-md-10">
+    <label>Q4 (from their registration)</label>
+    <textarea class="form-control" rows="3"></textarea>
+  </div>
+  <div class="form-group col-md-10">
+    <label>Q3 (from their registration)</label>
+    <textarea class="form-control" rows="3"></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-success col-xs-2 col-md-offset-1 ">Submit</button>
+</form>
+<% include ./partials/footer.ejs %>
