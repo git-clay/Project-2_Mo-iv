@@ -18,7 +18,7 @@ module.exports		= function(passport) {  //export serialized user info for login
 		passwordField : 'password',
 		passReqToCallback: true
 	}, function (req,email,password,callback) {
-		console.log(email,password,callback)
+		console.log(email,password,callback);
 		db.User.findOne({'local.email': email}, function(err, user){
 
 			if (err) return callback(err);
@@ -44,9 +44,9 @@ module.exports		= function(passport) {  //export serialized user info for login
 		passwordField : 'password',
 		passReqToCallback: true
 	}, function (req,email,password,callback) {
-	console.log(email)
+	console.log(email);
 
-		User.findOne({'local.email' : email}, function(err,user){
+		db.User.findOne({'local.email' : email}, function(err,user){
 			if(err) {return callback(err);}
 			if (!user) {
 				return callback(null, false, req.flash('loginMessage', 'That email is not registered with mo+iv'));

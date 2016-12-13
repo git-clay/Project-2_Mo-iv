@@ -13,15 +13,15 @@ curl -X POST --include 'https://twinword-sentiment-analysis.p.mashape.com/analyz
     <textarea class="form-control" rows="3"></textarea>
   </div>
   <div class="form-group col-md-10">
-    <label>Q1 (from their registration)</label>
+    <label><%=currentUser.goals[0] %></label>
     <textarea class="form-control" rows="3"></textarea>
   </div>
   <div class="form-group col-md-10">
-    <label>Q4 (from their registration)</label>
+    <label><%=currentUser.goals[1] %></label>
     <textarea class="form-control" rows="3"></textarea>
   </div>
   <div class="form-group col-md-10">
-    <label>Q3 (from their registration)</label>
+    <label><%=currentUser.goals[2] %></label>
     <textarea class="form-control" rows="3"></textarea>
   </div>
 

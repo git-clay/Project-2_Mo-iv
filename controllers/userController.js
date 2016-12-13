@@ -29,13 +29,14 @@ function getLogin(req, res) {
 }
 
 /*********************** POST LOGIN ******************************/
-function postLogin(req, res) {
+function postLogin(req, res,next) {
 		var loginStrategy = passport.authenticate('local-login', {
 		successRedirect	: '/',
 		failureRedirect	: '/login',
 		failureFlash	: true
 	});
-	return loginStrategy(req,res);
+		// console.log(loginStrategy(req,res));
+	return loginStrategy(req,res,next);
 }
 
 /*********************** GET LOGOUT ******************************/
