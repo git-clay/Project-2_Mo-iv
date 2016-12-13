@@ -36,7 +36,7 @@ app.use(passport.session());
 app.use(flash());
 require('./routes/passport.js')(passport);
 app.use(function(req,res,next){
-	console.log(res,req.user);
+	// console.log(res,req.user);
 
 	res.locals.currentUser = req.user;
 	next();

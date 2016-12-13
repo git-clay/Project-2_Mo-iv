@@ -53,17 +53,17 @@ function getQuestionaire(req,res) {
 
 /*********************** POST QUESTIONAIRE ******************************/
 function postQuestionaire(req,res) {
-	console.log(req.body)
+var ele = req.body.element;
 var unirest = require('unirest');
-
+console.log(ele)
 	unirest.post("https://twinword-sentiment-analysis.p.mashape.com/analyze/")
 		.header("X-Mashape-Key", "EiFKUp9ROymshrUthQlrkwSWWM7lp1OsBRCjsno44Cct6gKP8V")
 		.header("Content-Type", "application/x-www-form-urlencoded")
 		.header("Accept", "application/json")
-		.send("text=stuff goes here")
+		.send("text="+ele)
 		.end(function (result) {
-		  console.log(result.body.score, result.body.keywords);
-		  res.json(result.body.score);
+		  // console.log(result.body.keywords,result.body.keywords[0].word,result.body.keywords[0].score)
+		  res.json("total score:"+result.body.score+" words: "+ result.body.keywords.value);
 	});	
 	
 	
