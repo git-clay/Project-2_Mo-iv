@@ -25,9 +25,11 @@ router.route('/login')
   .get(userController.getLogin)
   .post(userController.postLogin);
 
-/*router.route('/questionaire')
+router.route('/questionaire')
 	.get(userController.getQuestionaire)
-	.post(userController.postQustionaire);*/
+	.post('/users',userController.postQustionaire);
+	//.put?????
+
 
 router.route("/logout")
   .get(userController.getLogout);
