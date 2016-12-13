@@ -7,7 +7,7 @@ curl -X POST --include 'https://twinword-sentiment-analysis.p.mashape.com/analyz
 
 
 <% include ./partials/header.ejs%>
-<form class="container-fluid col-md-offset-2" action="">
+<form class="container-fluid col-md-offset-2" method="POST" action="/questionaire">
   <div class="form-group col-md-10">
     <label> What has been on your mind today / General statement </label>
     <input id="q1" type="textarea" class="form-control" name="q1">
@@ -25,6 +25,6 @@ curl -X POST --include 'https://twinword-sentiment-analysis.p.mashape.com/analyz
     <input id="q4"type="textarea" class="form-control" name="q4">
   </div>
 
-  <button type="button" id="btn" class="btn btn-success col-xs-2 col-md-offset-1" >Submit</button>
+  <button type="submit" id="btn" class="btn btn-success col-xs-2 col-md-offset-1" >Submit</button>
 </form>
 <% include ./partials/footer.ejs %>

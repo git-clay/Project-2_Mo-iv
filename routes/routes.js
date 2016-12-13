@@ -27,7 +27,7 @@ router.route('/login')
 
 router.route('/questionaire')
 	.get(userController.getQuestionaire)
-	.post('/users',userController.postQustionaire);
+	.post(userController.postQuestionaire);
 	//.put?????
 
 

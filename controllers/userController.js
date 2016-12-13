@@ -1,6 +1,5 @@
 var passport = require("passport");
 var db = require('../models');
-var unirest = require('unirest');
 
 
 /*********************** GET REGISTER (ejs page) ******************************/
@@ -54,20 +53,20 @@ function getQuestionaire(req,res) {
 
 /*********************** POST QUESTIONAIRE ******************************/
 function postQuestionaire(req,res) {
-	console.log('1');
-	function apiPost (input){
-		console.log('2')
-		unirest.post("https://twinword-sentiment-analysis.p.mashape.com/analyze/")
+	console.log(req.body)
+var unirest = require('unirest');
+
+	unirest.post("https://twinword-sentiment-analysis.p.mashape.com/analyze/")
 		.header("X-Mashape-Key", "EiFKUp9ROymshrUthQlrkwSWWM7lp1OsBRCjsno44Cct6gKP8V")
 		.header("Content-Type", "application/x-www-form-urlencoded")
 		.header("Accept", "application/json")
-		.send("text="+input)
+		.send("text=stuff goes here")
 		.end(function (result) {
 		  console.log(result.body.score, result.body.keywords);
-		  res.json(result.body.score)
-		});	
-	}
-	return apiPost(req,res);
+		  res.json(result.body.score);
+	});	
+	
+	
 	}
 
 
