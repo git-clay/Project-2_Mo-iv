@@ -5,14 +5,16 @@ var express = require('express'),
 	passport = require('passport'),
 	userController = require('../controllers/userController.js'),
 	staticController = require('../controllers/static.js');
+
 function authenticatedUser(req,res,next){
-	console.log(next)
+	console.log(next);
 	if(req.isAuthenticated()) return next();
 	res.redirect('/');
 }
 
 router.route('/').get(staticController.home); //home
 
+/****************** Routes for authentication ************************/
 router
   .get('/register',userController.getRegister)
   .post('/users',userController.postRegister);
@@ -29,5 +31,8 @@ router.route('/login')
 
 router.route("/logout")
   .get(userController.getLogout);
+
+/****************** Routes for api ************************/
+
 
 module.exports = router;

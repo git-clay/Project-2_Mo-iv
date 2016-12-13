@@ -25,7 +25,7 @@ function getUsers(req,res){
 
 /*********************** GET LOGIN ******************************/
 function getLogin(req, res) { 
-	res.render('login.ejs', { message: request.flash('loginMessage') });
+	res.render('login.ejs', { message: req.flash('loginMessage') });
 }
 
 /*********************** POST LOGIN ******************************/

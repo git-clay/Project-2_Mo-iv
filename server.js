@@ -72,6 +72,6 @@ app.use(routes);
 
 /*********************** SERVER ******************************/
 app.listen(process.env.PORT || 3000, function() {
-	console.log('BOOM, Express is firing on all cylinder');
+	console.log('BOOM, Express is firing on all cylinders');
 });
 

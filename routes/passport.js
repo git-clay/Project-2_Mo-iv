@@ -20,7 +20,6 @@ module.exports		= function(passport) {  //export serialized user info for login
 	}, function (req,email,password,callback) {
 		console.log(email,password,callback)
 		db.User.findOne({'local.email': email}, function(err, user){
-	console.log(user)
 
 			if (err) return callback(err);
 			if (user){ //this email is already used
@@ -45,6 +44,8 @@ module.exports		= function(passport) {  //export serialized user info for login
 		passwordField : 'password',
 		passReqToCallback: true
 	}, function (req,email,password,callback) {
+	console.log(email)
+
 		User.findOne({'local.email' : email}, function(err,user){
 			if(err) {return callback(err);}
 			if (!user) {
