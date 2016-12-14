@@ -1,6 +1,24 @@
 var passport = require("passport");
 var db = require('../models');
+var unirest = require('unirest');
 
+
+
+var sentApi = function(element,req,res){ //sentiment api analysis
+	unirest.post("https://twinword-sentiment-analysis.p.mashape.com/analyze/")
+		.header("X-Mashape-Key", "EiFKUp9ROymshrUthQlrkwSWWM7lp1OsBRCjsno44Cct6gKP8V")
+		.header("Content-Type", "application/x-www-form-urlencoded")
+		.header("Accept", "application/json")
+		.send("text="+element)
+		.end(function (result) {
+
+		console.log(res.locals.currentUser);
+		// console.log(db.User)
+	  // console.log(result.body.keywords,result.body.keywords[0].word,result.body.keywords[0].score)
+		  res.json("total score:"+result.body.score+" words: ");
+
+	});	
+};
 
 /*********************** GET REGISTER (ejs page) ******************************/
 function getRegister(req, res) {
@@ -54,20 +72,9 @@ function getQuestionaire(req,res) {
 /*********************** POST QUESTIONAIRE ******************************/
 function postQuestionaire(req,res) {
 var ele = req.body.element;
-var unirest = require('unirest');
-console.log(ele)
-	unirest.post("https://twinword-sentiment-analysis.p.mashape.com/analyze/")
-		.header("X-Mashape-Key", "EiFKUp9ROymshrUthQlrkwSWWM7lp1OsBRCjsno44Cct6gKP8V")
-		.header("Content-Type", "application/x-www-form-urlencoded")
-		.header("Accept", "application/json")
-		.send("text="+ele)
-		.end(function (result) {
-		  // console.log(result.body.keywords,result.body.keywords[0].word,result.body.keywords[0].score)
-		  res.json("total score:"+result.body.score+" words: "+ result.body.keywords.value);
-	});	
-	
-	
-	}
+// console.log(ele);
+sentApi(ele,req,res);  
+}
 
 
 // These code snippets use an open-source library. http://unirest.io/nodejs
