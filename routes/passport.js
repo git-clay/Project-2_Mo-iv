@@ -19,7 +19,6 @@ module.exports		= function(passport) {  //export serialized user info for login
 		passReqToCallback: true
 	}, function (req,email,password,callback) {
 		db.User.findOne({'local.email': email}, function(err, user){
-
 			if (err) return callback(err);
 			if (user){ //this email is already used
 				return callback(null, false, req.flash('signupMessage', 'This E-mail is already being used on mo+iv'));

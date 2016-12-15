@@ -1,33 +1,21 @@
 var passport = require("passport");
 var db = require('../models');
-var express = require('express');
-var app = express();
-	bodyParser		= require('body-parser');
-app.use(bodyParser.urlencoded({extended:true}));
-app.use(bodyParser.json());
 
 var unirest = require('unirest');
 var count=1;
 var resultObj=[]; 
 
-
+/**************** sends request to api (element is the phrase being sent) ******************************/
 var sentApi = function(element,i,callback){ //sentiment api analysis 
-
 	unirest.post("https://twinword-sentiment-analysis.p.mashape.com/analyze/")
 	.header("X-Mashape-Key", "EiFKUp9ROymshrUthQlrkwSWWM7lp1OsBRCjsno44Cct6gKP8V")
 	.header("Content-Type", "application/x-www-form-urlencoded")
 	.header("Accept", "application/json")
 	.send("text="+element)
 	.end(function (result) {
-	// res.json("total score: "+result.body.score)
-	
-return callback(result,i,element)
-});
-
-		// console.log('done');
+		return callback(result,i,element);
+	});
 };
-
-
 
 
 /*********************** GET REGISTER (ejs page) ******************************/
@@ -81,45 +69,32 @@ function getQuestionaire(req,res) {
 
 /*********************** POST QUESTIONAIRE ******************************/
 function postQuestionaire(req,res) {
-	console.log(req.body);
-
-
-
-var ele = [req.body.q1,req.body.q2,req.body.q3,req.body.q4];
-for(var i = 0; i<ele.length;i++){
-
-	sentApi(ele[i],i,function(result,i,element){
-		var curObj = result.body;
-		console.log(i,element)
-		resultObj.push({q:i+1,type:curObj.type,score:curObj.score,key:curObj.keywords});
-			
-			
-if(count==ele.length){
-	//save resultObj to user
-console.log(resultObj);
-// console.log(resultObj[0].key);
-console.log(resultObj[1].key[0]);
-console.log(resultObj[1].q);
-
-res.locals.currentUser.qOne.push(resultObj)
-res.locals.currentUser.qTwo.push(resultObj)
-res.locals.currentUser.qThree.push(resultObj)
-
-res.locals.currentUser.save(function(err,stuff){
-
-	console.log("new user: "+res.locals.currentUser);
-	res.json(resultObj)
-});
-
-
-}
-		count++;
-		});
-	// console.log(i);
+	console.log(req.body); //object from front end form(questionaire responses)
+	var ele = [req.body.q1,req.body.q2,req.body.q3,req.body.q4];
 	
+	for(var i = 0; i<ele.length;i++){
+		sentApi(ele[i],i,function(result,i,element){ //the callback function is all the magic to obtain info as it comes back from api
+			var curObj = result.body;
+			console.log(i,element);
+			resultObj.push({q:i+1,type:curObj.type,score:curObj.score,key:curObj.keywords});
+			if(count==ele.length){	//when on the last element
+				//save resultObj to user
+				console.log(resultObj);
+				// console.log(resultObj[0].key);
+				console.log(resultObj[1].key[0]);
+				console.log(resultObj[1].q);
+				res.locals.currentUser.qOne.push(resultObj);
+				res.locals.currentUser.qTwo.push(resultObj);
+				res.locals.currentUser.qThree.push(resultObj);
 
-
-}
+				res.locals.currentUser.save(function(err,stuff){	//save to user
+				console.log("new user: "+res.locals.currentUser);
+				res.json(resultObj);
+				});
+			}
+			count++;
+		});
+	}
 }
 
 
@@ -148,6 +123,8 @@ var projId = req.params.id;
 
 
 /*********************** DELETE ******************************/
+
+/*********************** EXPORTS ******************************/
 
 module.exports = {
 	getRegister: getRegister,
