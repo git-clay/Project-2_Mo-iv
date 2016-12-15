@@ -91,7 +91,7 @@ for(var i = 0; i<ele.length;i++){
 	sentApi(ele[i],i,function(result,i,element){
 		var curObj = result.body;
 		console.log(i,element)
-		resultObj.push({q:i,type:curObj.type,score:curObj.score,key:curObj.keywords});
+		resultObj.push({q:i+1,type:curObj.type,score:curObj.score,key:curObj.keywords});
 			
 			
 if(count==ele.length){
@@ -108,6 +108,7 @@ res.locals.currentUser.qThree.push(resultObj)
 res.locals.currentUser.save(function(err,stuff){
 
 	console.log("new user: "+res.locals.currentUser);
+	res.json(resultObj)
 });
 
 

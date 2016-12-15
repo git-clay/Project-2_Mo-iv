@@ -29,7 +29,9 @@ router.route('/questionaire')
 	.get(userController.getQuestionaire)
 	.post(userController.postQuestionaire);
 	//.put?????
-
+router.route('/apis').get(function(req,res){
+res.render('apis.ejs');
+});
 
 router.route("/logout")
   .get(userController.getLogout);

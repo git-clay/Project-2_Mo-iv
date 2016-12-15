@@ -7,35 +7,19 @@ var sentiment = function(){
 console.log(qArr)
 
 	/***** 
-		$.post qArr and move forEach over to userController
-
-
-		This will allow userController to save all of the scores as an array of objects
-		that will easily be stored to the db.User
-
-		Then the ejs modal will use the most recent array for the results
-		page
+	
 
 		if {score is above a certain threshold "Excellent- keep it up"
 		else {google img search lowest scored word + motivation and post to modal
 		
 	******/
 
-	// qArr.forEach(function(element,index){ //elem:1 index:0 
-	// 	// console.log(element,index);
-	// 	var formData = $(this).serializeArray();
-	// 	var formObj = {
-	// 		index : index,
-	// 		element: element
-	// 	};
-	// 	console.log(formObj);
-
 		$.post( "/questionaire", qArr)
 		.done(function(data){
-			console.log("data loadaed: " + data);
+			console.log(data[0],data[1],data[2],data[3]);
 		});
-	// });
-	
+	   $(this).trigger("reset");
+
 $('#myModal').modal('show');
 };
 
