@@ -1,17 +1,18 @@
 <% include ./partials/header.ejs%>
-<% if (message) %>
-<div class="alert alert-danger"><%= message%></div>
+<% if (message){ %>
+<div id='alertBox' class="alert alert-danger"><%= message%></div>
+<%}else{''}%>
 <h2>Login</h2>
 
 <form method="post" action="/login">
   <div class="form-group">
     <label for="email">Email</label>
-    <input class="form-control" type="text" name="email" id="email">
+    <input class="form-control col-med-4" type="text" name="email" id="email">
   </div>
 
   <div class="form-group">
     <label for="email">Password</label>
-    <input class="form-control" type="password" name="password" id="password">
+    <input class="form-control col-med-4" type="password" name="password" id="password">
   </div>
 
   <input class="btn btn-default" type="submit">

@@ -1,3 +1,37 @@
 body{
 	background-image: url('http://wallpapercave.com/wp/VrmXlXD.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+h1{
+	color: white;
+}
+h1 small{
+	color: #BB76FF;
+}
+img{
+	opacity: .45;
+}
+.panel{
+	opacity: .6;
+	background: linear-gradient(140deg, #77C9D4, #57BC90);
+}
+.panel-heading{
+	opacity: .8;
+	background: linear-gradient(40deg, #57BC90, #77C9D4);
+}
+
+form{
+	width:70%;
+}
+#alerBox{
+	display: none;
+}
+.checkbox{
+	background: white;
+	opacity: .6;
+	font-opacity: .9;
+	color: black
+
 }
