@@ -1,11 +1,10 @@
-console.log('howdy')
-
 var sentiment = function(){
 	var q1=$("#q1").val(),
 		q2=$("#q2").val(),
 		q3=$("#q3").val(),
 		q4=$("#q4").val();
-	var qArr = [q1,q2,q3,q4];
+	var qArr = {q1:q1,q2:q2,q3:q3,q4:q4}
+console.log(qArr)
 
 	/***** 
 		$.post qArr and move forEach over to userController
@@ -22,20 +21,20 @@ var sentiment = function(){
 		
 	******/
 
-	qArr.forEach(function(element,index){ //elem:1 index:0 
-		// console.log(element,index);
-		var formData = $(this).serializeArray();
-		var formObj = {
-			index : index,
-			element: element
-		};
-		console.log(formObj);
+	// qArr.forEach(function(element,index){ //elem:1 index:0 
+	// 	// console.log(element,index);
+	// 	var formData = $(this).serializeArray();
+	// 	var formObj = {
+	// 		index : index,
+	// 		element: element
+	// 	};
+	// 	console.log(formObj);
 
-		$.post( "/questionaire", formObj)
+		$.post( "/questionaire", qArr)
 		.done(function(data){
 			console.log("data loadaed: " + data);
 		});
-	});
+	// });
 	
 $('#myModal').modal('show');
 };

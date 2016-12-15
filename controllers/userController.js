@@ -1,24 +1,54 @@
 var passport = require("passport");
 var db = require('../models');
+var express = require('express');
+var app = express();
+	bodyParser		= require('body-parser');
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
+
 var unirest = require('unirest');
+var status_code =200;
+var delay=5000;
 
 
+var sentApi = function(element,res,callback){ //sentiment api analysis 
+// console.log("element: "+element);
+// app.get('https://twinword-sentiment-analysis.p.mashape.com/analyze/',function(req,res){
+// app.set("X-Mashape-Key", "EiFKUp9ROymshrUthQlrkwSWWM7lp1OsBRCjsno44Cct6gKP8V")
+// app.set("Accept", "application/json")
+// app.send("text="+element)
 
-var sentApi = function(element,req,res){ //sentiment api analysis
-	unirest.post("https://twinword-sentiment-analysis.p.mashape.com/analyze/")
+// 	console.log(req,res)
+// console.log("resraw: "+res.raw_body);
+	// console.log(res.raw_body.result_code);
+// });
+
+		unirest.post("https://twinword-sentiment-analysis.p.mashape.com/analyze/")
 		.header("X-Mashape-Key", "EiFKUp9ROymshrUthQlrkwSWWM7lp1OsBRCjsno44Cct6gKP8V")
 		.header("Content-Type", "application/x-www-form-urlencoded")
 		.header("Accept", "application/json")
 		.send("text="+element)
 		.end(function (result) {
 
-		console.log(res.locals.currentUser);
-		// console.log(db.User)
+// console.log("resraw: "+result.raw_body);
+	// console.log(res.raw_body.result_code);
 	  // console.log(result.body.keywords,result.body.keywords[0].word,result.body.keywords[0].score)
-		  res.json("total score:"+result.body.score+" words: ");
+// console.log(result)
+// resRaw.type = positive,neutral or negative
+// console.log("score: "+result.body.score,"keywords: "+result.body.keywords[[0]],"type: "+result.body.type)
+//resraw.score = total average
+//resraw.keywords = [{"word":"happy","score":0.941875182},{"word":"trust","score":0.714332352}]
+	// console.log("user: "+res.locals.currentUser.goals);
+	// res.json("total score: "+result.body.score)
+	
+return callback(result.body)
+});
 
-	});	
+		// console.log('done');
 };
+
+
+
 
 /*********************** GET REGISTER (ejs page) ******************************/
 function getRegister(req, res) {
@@ -71,9 +101,23 @@ function getQuestionaire(req,res) {
 
 /*********************** POST QUESTIONAIRE ******************************/
 function postQuestionaire(req,res) {
-var ele = req.body.element;
-// console.log(ele);
-sentApi(ele,req,res);  
+	console.log('post');
+var resultObj=[];
+
+var ele = [req.body.q1,req.body.q2,req.body.q3,req.body.q4];
+for(var i = 0; i<ele.length;i++){
+
+		sentApi(ele[i],res,function(result){
+			console.log(result);
+
+		});
+	// console.log(i);
+	
+
+
+}
+console.log('after for');
+
 }
 
 
