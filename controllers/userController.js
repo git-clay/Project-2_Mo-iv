@@ -102,6 +102,9 @@ console.log(resultObj[1].key[0]);
 console.log(resultObj[1].q);
 
 res.locals.currentUser.qOne.push(resultObj)
+res.locals.currentUser.qTwo.push(resultObj)
+res.locals.currentUser.qThree.push(resultObj)
+
 res.locals.currentUser.save(function(err,stuff){
 
 	console.log("new user: "+res.locals.currentUser);

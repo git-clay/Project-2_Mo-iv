@@ -35,26 +35,28 @@ curl -X POST --include 'https://twinword-sentiment-analysis.p.mashape.com/analyz
         <h4 class="modal-title">Today's Results</h4>
       </div>
       <div class="modal-body">
-        <p>One fine body&hellip;</p>
+
         <h3>Overall</h3>
-        <h3><small><% %></small></h3>
-        <h3><small><% %></small></h3>
-        <p></p>
+        <% var len = currentUser.qTwo.length;%>
+     
+        <h3><small><%= currentUser.qTwo[0][0].type%></small></h3>
+        <h3><small><%=currentUser.qTwo[0][0].score %></small></h3>
+        <p>cool picture goes here</p>
 
         <h3><%=currentUser.goals[0] %></h3>
-        <h3><small><% %></small></h3>
-        <h3><small><% %></small></h3>
-        <p></p>
+        <h3><small><%= currentUser.qTwo[0][1].type%></small></h3>
+        <h3><small><%=currentUser.qTwo[0][1].score %></small></h3>
+        <p>cool picture goes here</p>
 
         <h3><%=currentUser.goals[1] %></h3>
-        <h3><small><% %></small></h3>
-        <h3><small><% %></small></h3>
-        <p></p>
+        <h3><small><%= currentUser.qTwo[0][2].type%></small></h3>
+        <h3><small><%=currentUser.qTwo[0][2].score %></small></h3>
+        <p>cool picture goes here</p>
 
         <h3><%=currentUser.goals[2] %></h3>
-        <h3><small><% %></small></h3>
-        <h3><small><% %></small></h3>
-        <p></p>
+        <h3><small><%= currentUser.qTwo[0][3].type%></small></h3>
+        <h3><small><%=currentUser.qTwo[0][3].score %></small></h3>
+        <p>cool picture goes here</p>
 
       </div>
       <div class="modal-footer">

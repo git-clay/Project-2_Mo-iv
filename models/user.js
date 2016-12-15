@@ -9,8 +9,8 @@ var UserSchema = new Schema({
 	},
 	name: String,
 	goals:[String],
-	qOne:[String],
-	qTwo:[String],
+	qOne:Object,
+	qTwo:Array,
 	qThree:[String],
 	qFour:[String]
 });
