@@ -77,6 +77,7 @@ function postQuestionaire(req,res) {
 			var curObj = result.body;
 			console.log(i,element);
 			resultObj.push({q:i+1,type:curObj.type,score:curObj.score,key:curObj.keywords});
+			console.log(count, ele.length)
 			if(count==ele.length){	//when on the last element
 				//save resultObj to user
 				console.log(resultObj);
@@ -89,7 +90,7 @@ function postQuestionaire(req,res) {
 
 				res.locals.currentUser.save(function(err,stuff){	//save to user
 				console.log("new user: "+res.locals.currentUser);
-				res.json(resultObj);
+				res.json(res.locals.currentUser);
 				});
 			}
 			count++;

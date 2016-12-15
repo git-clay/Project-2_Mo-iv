@@ -1,8 +1,24 @@
 var expect = require('chai').expect;
 var server = require('../server.js');
+var usrCont = require('../controllers/userController.js');
+var models = require('../models');
 
 describe('Testing server', function(){
-	it('Should send a 200 response');
+	before(function(){
+		server.listen (process.env.PORT || 3000);
+	});
+	it('Should send a 200 response',function(){
+		request.get(options, function (err, res, body) {
+		    expect(res.statusCode).to.equal(200);
+		    expect(res.body).to.equal('correct header');
+		    done();
+		  });
+	});
+
+	 
+	after(function(){
+		server.close();
+	});
 });
 
 describe('Pulling & saving from hedonometer',function(){

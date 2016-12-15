@@ -27,43 +27,6 @@ curl -X POST --include 'https://twinword-sentiment-analysis.p.mashape.com/analyz
 
   <button type="submit" id="btn" class="btn btn-success col-xs-2 col-md-offset-1" >Submit</button>
 </form>
-<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Today's Results</h4>
-      </div>
-      <div class="modal-body">
 
-        <h3>Overall</h3>
-        <% var len = currentUser.qTwo.length;%>
-     
-        <h3><small><%= currentUser.qTwo[0][0].type%></small></h3>
-        <h3><small><%=currentUser.qTwo[0][0].score %></small></h3>
-        <p>cool picture goes here</p>
 
-        <h3><%=currentUser.goals[0] %></h3>
-        <h3><small><%= currentUser.qTwo[0][1].type%></small></h3>
-        <h3><small><%=currentUser.qTwo[0][1].score %></small></h3>
-        <p>cool picture goes here</p>
-
-        <h3><%=currentUser.goals[1] %></h3>
-        <h3><small><%= currentUser.qTwo[0][2].type%></small></h3>
-        <h3><small><%=currentUser.qTwo[0][2].score %></small></h3>
-        <p>cool picture goes here</p>
-
-        <h3><%=currentUser.goals[2] %></h3>
-        <h3><small><%= currentUser.qTwo[0][3].type%></small></h3>
-        <h3><small><%=currentUser.qTwo[0][3].score %></small></h3>
-        <p>cool picture goes here</p>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 <% include ./partials/footer.ejs %>
