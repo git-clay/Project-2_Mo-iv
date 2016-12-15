@@ -9,7 +9,10 @@ var UserSchema = new Schema({
 	},
 	name: String,
 	goals:[String],
-	questionReponses:[String]
+	qOne:[String],
+	qTwo:[String],
+	qThree:[String],
+	qFour:[String]
 });
 
 UserSchema.methods.encrypt = function(password){

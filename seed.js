@@ -10,9 +10,9 @@ var userList =[
 db.User.remove({}, function(err, doc){
 
   db.User.create(userList, function(err, users){
-    if (err) { return console.log('ERROR', err); }
-    console.log("all users:", users);
-    console.log("created", users.length, "users");
+  //   if (err) { return console.log('ERROR', err); }
+  //   console.log("all users:", users);
+  //   console.log("created", users.length, "users");
     process.exit();
   });
 

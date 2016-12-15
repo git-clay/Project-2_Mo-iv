@@ -7,41 +7,21 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
 var unirest = require('unirest');
-var status_code =200;
-var delay=5000;
+var count=1;
+var resultObj=[]; 
 
 
-var sentApi = function(element,res,callback){ //sentiment api analysis 
-// console.log("element: "+element);
-// app.get('https://twinword-sentiment-analysis.p.mashape.com/analyze/',function(req,res){
-// app.set("X-Mashape-Key", "EiFKUp9ROymshrUthQlrkwSWWM7lp1OsBRCjsno44Cct6gKP8V")
-// app.set("Accept", "application/json")
-// app.send("text="+element)
+var sentApi = function(element,i,callback){ //sentiment api analysis 
 
-// 	console.log(req,res)
-// console.log("resraw: "+res.raw_body);
-	// console.log(res.raw_body.result_code);
-// });
-
-		unirest.post("https://twinword-sentiment-analysis.p.mashape.com/analyze/")
-		.header("X-Mashape-Key", "EiFKUp9ROymshrUthQlrkwSWWM7lp1OsBRCjsno44Cct6gKP8V")
-		.header("Content-Type", "application/x-www-form-urlencoded")
-		.header("Accept", "application/json")
-		.send("text="+element)
-		.end(function (result) {
-
-// console.log("resraw: "+result.raw_body);
-	// console.log(res.raw_body.result_code);
-	  // console.log(result.body.keywords,result.body.keywords[0].word,result.body.keywords[0].score)
-// console.log(result)
-// resRaw.type = positive,neutral or negative
-// console.log("score: "+result.body.score,"keywords: "+result.body.keywords[[0]],"type: "+result.body.type)
-//resraw.score = total average
-//resraw.keywords = [{"word":"happy","score":0.941875182},{"word":"trust","score":0.714332352}]
-	// console.log("user: "+res.locals.currentUser.goals);
+	unirest.post("https://twinword-sentiment-analysis.p.mashape.com/analyze/")
+	.header("X-Mashape-Key", "EiFKUp9ROymshrUthQlrkwSWWM7lp1OsBRCjsno44Cct6gKP8V")
+	.header("Content-Type", "application/x-www-form-urlencoded")
+	.header("Accept", "application/json")
+	.send("text="+element)
+	.end(function (result) {
 	// res.json("total score: "+result.body.score)
 	
-return callback(result.body)
+return callback(result,i,element)
 });
 
 		// console.log('done');
@@ -101,23 +81,41 @@ function getQuestionaire(req,res) {
 
 /*********************** POST QUESTIONAIRE ******************************/
 function postQuestionaire(req,res) {
-	console.log('post');
-var resultObj=[];
+	console.log(req.body);
+
+
 
 var ele = [req.body.q1,req.body.q2,req.body.q3,req.body.q4];
 for(var i = 0; i<ele.length;i++){
 
-		sentApi(ele[i],res,function(result){
-			console.log(result);
+	sentApi(ele[i],i,function(result,i,element){
+		var curObj = result.body;
+		console.log(i,element)
+		resultObj.push({q:i,type:curObj.type,score:curObj.score,key:curObj.keywords});
+			
+			
+if(count==ele.length){
+	//save resultObj to user
+console.log(resultObj);
+// console.log(resultObj[0].key);
+console.log(resultObj[1].key[0]);
+console.log(resultObj[1].q);
 
+res.locals.currentUser.qOne.push(resultObj)
+res.locals.currentUser.save(function(err,stuff){
+
+	console.log("new user: "+res.locals.currentUser);
+});
+
+
+}
+		count++;
 		});
 	// console.log(i);
 	
 
 
 }
-console.log('after for');
-
 }
 
 
