@@ -1,3 +1,6 @@
+html{
+	padding:40px;
+}
 body{
 	background-image: url('../images/background.jpg');
 	background-repeat: no-repeat;
