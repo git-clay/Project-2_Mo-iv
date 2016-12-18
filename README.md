@@ -1,8 +1,9 @@
 # Project-2_Mo-iv
 ## project 2 is a full stack app centered around connecting 3rd party apis and a user
 
-Trello: https://trello.com/b/41IPG9C4/project-2-full-stack
-Wireframes: https://github.com/git-clay/mapping-wireframes/tree/master/sample-project
+###Trello: https://trello.com/b/41IPG9C4/project-2-full-stack
+
+###Wireframes: https://github.com/git-clay/mapping-wireframes/tree/master/sample-project
 
 The goal for this app was to create an enviroment for users to set goals and have a quantitative value each day for how motivated they are for each goal.  The response to each daily form them fill out would include recommendations based on their results.  I also wanted this app to track each user's values and create a graph to show day to day so they can see paterns in their motivation. 
 
