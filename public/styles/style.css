@@ -49,3 +49,13 @@ form{
 a{
 	color:#BB76FF;
 }
+body.modal-open div.modal-backdrop {
+    z-index: 0;
+}
+div.modal-body{
+	max-height: 420px;
+    overflow-y: auto;
+}
+#myModal{
+	position: relative;
+}

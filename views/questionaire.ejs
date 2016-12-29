@@ -1,12 +1,21 @@
-<!--POSThttps://twinword-sentiment-analysis.p.mashape.com/analyze/
-curl -X POST --include 'https://twinword-sentiment-analysis.p.mashape.com/analyze/' \
-  -H 'X-Mashape-Key: EiFKUp9ROymshrUthQlrkwSWWM7lp1OsBRCjsno44Cct6gKP8V' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Accept: application/json' \
-  -d 'text=great value in its price range!'-->
-
-
 <% include ./partials/header.ejs%>
+    <div id="myModal" class="modal fade" tabindex='-1' role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" onclick='location.href="/"' aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Todays Results</h4>
+      </div>
+      <div class="modal-body">
+
+<!-- modal content will be appended here -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" onclick='location.href="/"' class="btn btn-primary">Now get to it!</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+
+
 <form class="container-fluid col-md-offset-2" method="POST" action="/questionaire">
   <div class="form-group col-md-10">
     <label> What has been on your mind today / General statement </label>

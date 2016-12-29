@@ -21,7 +21,7 @@ var express 	= require('express'),
 var db = require('./models');
 app.use(express.static('public'));
 
-
+console.log(process.env)
 
 
 /*********************** VIEWS ******************************/
