@@ -6,8 +6,9 @@ var express 	= require('express'),
 	flash        = require('connect-flash'),
 	morgan       = require('morgan'),
 	cookieParser = require('cookie-parser'),
-	session      = require('express-session');
-	bodyParser		= require('body-parser');
+	session      = require('express-session'),
+	bodyParser	= require('body-parser'),
+	Papa	= require('papaparse');	//need to add 'var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;' to papaparse file
 	app.use(morgan('dev'));
 	app.use(cookieParser());
 	app.use(bodyParser.urlencoded({extended:true}));
@@ -16,6 +17,18 @@ var express 	= require('express'),
 // mongoose.connect('mongodb://localhost/local-authentication-with-passport'); 
 
 
+// Papa.parse("http://hedonometer.org/data/shifts/world/2016-12-29-shift.csv", {
+// 	download: true,
+// 	complete: function(results) {
+// 		console.log(results);
+// 	}
+// });
+// Papa.parse("http://hedonometer.org/data/shifts/world/2016-12-29-metashift.csv", {
+// 	download: true,
+// 	complete: function(results) {
+// 		console.log(results);
+// 	}
+// });
 /*********************** DATABASE ******************************/
 
 var db = require('./models');

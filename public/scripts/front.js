@@ -1,3 +1,29 @@
+var shiftRes,
+	metashiftRes;
+
+
+function getHedoData(){
+Papa.parse("http://hedonometer.org/data/shifts/world/2016-12-29-shift.csv", {
+	download: true,
+	complete: function(results) {
+		shiftRes = results;	//shift is the top words of the day
+		div.append(shiftRes.data[1]);
+
+		console.log(shiftRes);
+	}
+});
+
+Papa.parse("http://hedonometer.org/data/shifts/world/2016-12-29-metashift.csv", {
+	download: true,
+	complete: function(results) {
+		metashiftRes = results; //metashift is the overall average scores
+		// div.append(metashiftRes.data[1]);
+
+		console.log(metashiftRes);
+	}
+});
+}
+
 var sentiment = function(){
 	var q1=$("#q1").val(),	//these are the question responses
 		q2=$("#q2").val(),
@@ -31,6 +57,8 @@ var sentiment = function(){
 };
 
 $(document).ready(function(){
+	div = document.getElementById("graph");
+	getHedoData();
 	$('#btn').click(function(e){
 		sentiment();
 		e.preventDefault();
