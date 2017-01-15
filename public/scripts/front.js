@@ -1,29 +1,49 @@
 var shiftRes,
 	metashiftRes;
 
+// var date 	= new Date(),
+// 	dd 		= date.getDate()-1,
+// 	mm 		= date.getMonth()+1,
+// 	yyyy	= date.getFullYear(),
+// 	url		= 'http://hedonometer.org/data/shifts/world/',
+// 	shift 	= '-shift.csv',
+// 	metashift = '-metashift.csv';
+
+// if(dd<10) {dd='0'+dd;} 
+// if(mm<10) {mm='0'+mm;} 
+// date =	yyyy+'-'+ mm +'-'+dd;
+
+// var getShift = url+date+shift,
+// 	getMetashift = url+date+metashift;
+
 
 function getHedoData(){
-Papa.parse("http://hedonometer.org/data/shifts/world/2016-12-29-shift.csv", {
-	download: true,
-	complete: function(results) {
-		shiftRes = results;	//shift is the top words of the day
-		div.append(shiftRes.data[1]);
-
-		console.log(shiftRes);
-	}
+var shiftArr =[];
+$.get('/api/daily',function(req,res){
+	console.log('get request',req[0])
+	shiftArr = req[0].shiftArray;
+	metashiftRes = req[0].metaShiftArray;
 });
+	function drawChart() {
+	  var data = new google.visualization.DataTable();
+	  data.addColumn('string','Word');
+	  data.addColumn('number','Score');
+	  data.addRows(shiftArr)
 
-Papa.parse("http://hedonometer.org/data/shifts/world/2016-12-29-metashift.csv", {
-	download: true,
-	complete: function(results) {
-		metashiftRes = results; //metashift is the overall average scores
-		// div.append(metashiftRes.data[1]);
+	    var options = {
+	      title: "Today's Total Happiness Score: "+metashiftRes[1][2],
+	      curveType: 'function'
+	    };
 
-		console.log(metashiftRes);
-	}
-});
+	    var chart = new google.visualization.LineChart(document.getElementById('graph'));
+
+	    chart.draw(data, options);
+	  }
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(drawChart);
+       
 }
-
+getHedoData()
 var sentiment = function(){
 	var q1=$("#q1").val(),	//these are the question responses
 		q2=$("#q2").val(),

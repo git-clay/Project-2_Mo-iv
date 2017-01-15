@@ -18,6 +18,9 @@ h2{
 img{
 	opacity: .45;
 }
+#graph{
+	height:200px;
+}
 .panel{
 	opacity: .8;
 	background: linear-gradient(140deg, #1b2f74, #467c9b);

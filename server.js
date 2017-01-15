@@ -8,33 +8,20 @@ var express 	= require('express'),
 	cookieParser = require('cookie-parser'),
 	session      = require('express-session'),
 	bodyParser	= require('body-parser'),
+	schedule	= require('node-schedule')
 	Papa	= require('papaparse');	//need to add 'var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;' to papaparse file
 	app.use(morgan('dev'));
 	app.use(cookieParser());
 	app.use(bodyParser.urlencoded({extended:true}));
 	app.use(bodyParser.json());
 
-// mongoose.connect('mongodb://localhost/local-authentication-with-passport'); 
 
-
-// Papa.parse("http://hedonometer.org/data/shifts/world/2016-12-29-shift.csv", {
-// 	download: true,
-// 	complete: function(results) {
-// 		console.log(results);
-// 	}
-// });
-// Papa.parse("http://hedonometer.org/data/shifts/world/2016-12-29-metashift.csv", {
-// 	download: true,
-// 	complete: function(results) {
-// 		console.log(results);
-// 	}
-// });
 /*********************** DATABASE ******************************/
 
 var db = require('./models');
 app.use(express.static('public'));
 
-console.log(process.env)
+// console.log(process.env)
 
 
 /*********************** VIEWS ******************************/
@@ -59,7 +46,60 @@ var routes = require('./routes/routes.js');
 app.use(routes);
 
 
-/***********************  ******************************/
+/*********************** Daily api call  ******************************/
+
+var shiftRes,
+	metashiftRes;
+
+var date 	= new Date(),
+	dd 		= date.getDate()-1,
+	mm 		= date.getMonth()+1,
+	yyyy	= date.getFullYear(),
+	rule	= new schedule.RecurrenceRule(),
+	url		= 'http://hedonometer.org/data/shifts/world/',
+	shift 	= '-shift.csv',
+	metashift = '-metashift.csv';
+
+rule.dayOfWeek =[0, new schedule.Range(0-7)];
+rule.hour = 0;
+var apiCall = schedule.scheduleJob(rule,function(){
+	getHedoData();
+});
+
+if(dd<10) {dd='0'+dd;} 
+if(mm<10) {mm='0'+mm;} 
+date =	yyyy+'-'+ mm +'-'+dd;
+
+var getShift = url+date+shift,
+	getMetashift = url+date+metashift;
+
+function getHedoData(){
+var shiftArr =[],
+	shiftRes,
+	metashiftRes,
+	storeObj={};
+	Papa.parse(getShift, {
+		download: true,
+		complete: function(results) {
+			shiftRes = results.data;	//shift is the top words of the day
+			for(var i=1;i<shiftRes.length;i++){
+				shiftArr.push([shiftRes[i][1],parseFloat(shiftRes[i][0])]);
+			}
+		}
+	});
+
+	Papa.parse(getMetashift, {
+		download: true,
+		complete: function(results) {
+			metashiftRes = results.data; //metashift is the overall average scores
+		}
+	});  
+	storeObj={'date':date,'shiftArray': shiftArr,'metaShiftArray': metashiftRes}    
+	db.DailyInfo.create(storeObj,function(err,daily){
+		process.exit();
+	});
+}
+
 
 
 

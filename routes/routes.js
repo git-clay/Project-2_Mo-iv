@@ -4,7 +4,8 @@ var express = require('express'),
 	methodOverride = require('method-override'),
 	passport = require('passport'),
 	userController = require('../controllers/userController.js'),
-	staticController = require('../controllers/static.js');
+	staticController = require('../controllers/static.js'),
+	dailyController = require('../controllers/dailyController.js');
 
 function authenticatedUser(req,res,next){
 	console.log(next);
@@ -29,6 +30,9 @@ router.route('/questionaire')
 	.get(userController.getQuestionaire)
 	.post(userController.postQuestionaire);
 	//.put?????
+router.route('/api/daily')
+	.get(dailyController.getDaily);
+
 router.route('/apis')
 	.get(function(req,res){
 	res.render('apis.ejs');

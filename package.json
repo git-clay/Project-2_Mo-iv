@@ -34,6 +34,7 @@
     "mongoose": "^4.7.1",
     "morgan": "^1.7.0",
     "node-env-file": "^0.1.8",
+    "node-schedule": "^1.2.0",
     "nodemon": "^1.11.0",
     "normalize.css": "^5.0.0",
     "passport": "^0.3.2",
