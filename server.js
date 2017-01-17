@@ -60,11 +60,15 @@ var date 	= new Date(),
 	shift 	= '-shift.csv',
 	metashift = '-metashift.csv';
 
-rule.dayOfWeek =[0, new schedule.Range(0-7)];
+rule.dayOfWeek =[0, new schedule.Range(0,7)];
 rule.hour = 0;
-var apiCall = schedule.scheduleJob(rule,function(){
+//used to schedule the api call
+var apiCall = schedule.scheduleJob(rule,function(){ 
+	console.log('ran', date)
 	getHedoData();
 });
+
+console.log('date:',date,'rule:',rule,'schedule',schedule)
 
 if(dd<10) {dd='0'+dd;} 
 if(mm<10) {mm='0'+mm;} 
@@ -78,6 +82,7 @@ var shiftArr =[],
 	shiftRes,
 	metashiftRes,
 	storeObj={};
+	console.log('in getHedoData',date)
 	Papa.parse(getShift, {
 		download: true,
 		complete: function(results) {
@@ -95,6 +100,8 @@ var shiftArr =[],
 		}
 	});  
 	storeObj={'date':date,'shiftArray': shiftArr,'metaShiftArray': metashiftRes}    
+		console.log(storeObj)
+
 	db.DailyInfo.create(storeObj,function(err,daily){
 		process.exit();
 	});

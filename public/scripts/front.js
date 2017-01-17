@@ -18,9 +18,10 @@ var shiftRes,
 
 
 function getHedoData(){
+	// from db 
 var shiftArr =[];
 $.get('/api/daily',function(req,res){
-	console.log('get request',req[0])
+	console.log('get request',req[0]);
 	shiftArr = req[0].shiftArray;
 	metashiftRes = req[0].metaShiftArray;
 });
