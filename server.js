@@ -9,8 +9,8 @@ var express 	= require('express'),
 	session      = require('express-session'),
 	bodyParser	= require('body-parser'),
 	schedule	= require('node-schedule')
-	Papa	= require('papaparse'),	//need to add 'var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;' to papaparse file
-	babyparse	= require(babyparse);
+	Papa	= require('papaparse');	//need to add 'var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;' to papaparse file
+	// babyparse	= require(babyparse);
 	app.use(morgan('dev'));
 	app.use(cookieParser());
 	app.use(bodyParser.urlencoded({extended:true}));
