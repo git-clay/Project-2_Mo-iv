@@ -9,7 +9,8 @@ var express 	= require('express'),
 	session      = require('express-session'),
 	bodyParser	= require('body-parser'),
 	schedule	= require('node-schedule')
-	Papa	= require('papaparse');	//need to add 'var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;' to papaparse file
+	Papa	= require('papaparse'),	//need to add 'var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;' to papaparse file
+	babyparse	= require(babyparse);
 	app.use(morgan('dev'));
 	app.use(cookieParser());
 	app.use(bodyParser.urlencoded({extended:true}));
@@ -106,9 +107,13 @@ var shiftArr =[],
 		process.exit();
 	});
 }
-
-
-
+getHedoData();
+//might need 'baby parse instead of papaparse!!!!'
+// pass in the contents of a csv file 
+// parsed = Baby.parse(csv);
+ 
+// // voila 
+// rows = parsed.data;
 
 /*********************** SERVER ******************************/
 app.listen(process.env.PORT || 3000, function() {
