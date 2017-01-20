@@ -45,6 +45,7 @@ function babyParseFunc (url,which) {
 	storeObj.date = date;
 		console.log(storeObj)
 	db.DailyInfo.create(storeObj)
+			process.exit();
 		}
 	});
 }
