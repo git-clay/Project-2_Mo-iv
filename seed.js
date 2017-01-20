@@ -8,11 +8,11 @@ var userList =[
 ];
 var infoList = {
 	date: '2017-10-04',
-	shiftArray: [['words',0.023432],['morewords',-0.124345]],
-	metaShiftArray: [0.1231,6.2345234]
+	shift: [['words',0.023432],['morewords',-0.124345]],
+	meta: [0.1231,6.2345234]
 
 };
-// db.User.remove({}, function(err, doc){
+db.DailyInfo.remove({}, function(err, doc){
 	db.DailyInfo.create(infoList,function(err,daily){
 		console.log('created',daily)
 		process.exit();
@@ -25,4 +25,4 @@ var infoList = {
   //   process.exit();
   // });
 
-// });
+});
