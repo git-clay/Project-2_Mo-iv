@@ -3,8 +3,8 @@ var Schema = mongoose.Schema;
 
 var DailySchema = new Schema({
 	date: Date,
-	shiftArray: Array,
-	metaShiftArray: Array
+	shift: Array,
+	meta: Array
 });
 
 module.exports = mongoose.model('DailyInfo', DailySchema);

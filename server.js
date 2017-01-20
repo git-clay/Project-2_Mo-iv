@@ -8,9 +8,10 @@ var express 	= require('express'),
 	cookieParser = require('cookie-parser'),
 	session      = require('express-session'),
 	bodyParser	= require('body-parser'),
-	schedule	= require('node-schedule')
-	Papa	= require('papaparse');	//need to add 'var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;' to papaparse file
-	// babyparse	= require(babyparse);
+	schedule	= require('node-schedule'),
+	// Papa	= require('papaparse')
+	httpRequest = require('request'),
+	Baby	= require('babyparse');
 	app.use(morgan('dev'));
 	app.use(cookieParser());
 	app.use(bodyParser.urlencoded({extended:true}));
@@ -69,51 +70,54 @@ var apiCall = schedule.scheduleJob(rule,function(){
 	getHedoData();
 });
 
-console.log('date:',date,'rule:',rule,'schedule',schedule)
+// console.log('date:',date,'rule:',rule,'schedule',schedule)
 
 if(dd<10) {dd='0'+dd;} 
 if(mm<10) {mm='0'+mm;} 
 date =	yyyy+'-'+ mm +'-'+dd;
 
 var getShift = url+date+shift,
-	getMetashift = url+date+metashift;
-
-function getHedoData(){
-var shiftArr =[],
-	shiftRes,
-	metashiftRes,
+	getMetashift = url+date+metashift,
 	storeObj={};
-	console.log('in getHedoData',date)
-	Papa.parse(getShift, {
-		download: true,
-		complete: function(results) {
-			shiftRes = results.data;	//shift is the top words of the day
-			for(var i=1;i<shiftRes.length;i++){
-				shiftArr.push([shiftRes[i][1],parseFloat(shiftRes[i][0])]);
-			}
-		}
-	});
 
-	Papa.parse(getMetashift, {
-		download: true,
-		complete: function(results) {
-			metashiftRes = results.data; //metashift is the overall average scores
+function getCsv(url,callback){
+	httpRequest.get(url, function (err, res, body) {
+	    if (!err && res.statusCode == 200) {
+	        callback(body);
+	    }
+	})
+}
+
+function babyParseFunc (url,which) { 
+	getCsv(url,function(res){
+	var parsed = Baby.parse(res).data;
+	console.log(parsed)
+	
+	
+		if(which=='shift'){
+		storeObj.shift=parsed;
+		console.log(typeof storeObj.shift)
+		} else if(which=='meta'){
+		storeObj.meta=parsed;
+		console.log(typeof storeObj.meta)
 		}
-	});  
-	storeObj={'date':date,'shiftArray': shiftArr,'metaShiftArray': metashiftRes}    
+	if(storeObj.shift!== undefined &&storeObj.meta!== undefined){
+	storeObj.date = date;
 		console.log(storeObj)
-
-	db.DailyInfo.create(storeObj,function(err,daily){
-		process.exit();
+	db.DailyInfo.create(storeObj)
+		}
 	});
 }
+
+
+function getHedoData(callback){
+
+	babyParseFunc(getShift,'shift') //babyfunc -> getCsv = returned
+	babyParseFunc(getMetashift,'meta')
+	console.log('in getHedoData',date,storeObj.shift);
+
+}
 getHedoData();
-//might need 'baby parse instead of papaparse!!!!'
-// pass in the contents of a csv file 
-// parsed = Baby.parse(csv);
- 
-// // voila 
-// rows = parsed.data;
 
 /*********************** SERVER ******************************/
 app.listen(process.env.PORT || 3000, function() {
