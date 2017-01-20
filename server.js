@@ -32,7 +32,7 @@ app.engine('ejs', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 
 /*********************** PASSPORT ******************************/
-app.use(session({ secret: 'Stuff' })); 
+// app.use(session({ secret: 'Stuff' })); 
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
