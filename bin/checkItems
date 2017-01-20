@@ -8,7 +8,7 @@ var express 	= require('express'),
 	mongoose.connect(process.env.MONGODB_URI ||process.env.MONGOLAB_URI||
 	process.env.MONGOHQ_URL);
 
-var db = require('./models');
+var db = require('../models');
 
 var date 	= new Date(),
 	dd 		= date.getDate()-1,  //yesterdays info
