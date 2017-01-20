@@ -5,7 +5,7 @@ var express 	= require('express'),
 	httpRequest = require('request'),
 	Baby	= require('babyparse'),
 	mongoose = require('mongoose');
-	mongoose.connect(process.env.MONGODB_URI ||process.env.MONGOLAB_URI||
+	mongoose.createConnection(process.env.MONGODB_URI ||process.env.MONGOLAB_URI||
 	process.env.MONGOHQ_URL);
 
 var db = require('../models');
