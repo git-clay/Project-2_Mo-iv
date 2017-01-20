@@ -101,7 +101,7 @@ function babyParseFunc (url,which) {
 	if(storeObj.shift!== undefined &&storeObj.meta!== undefined){
 	storeObj.date = date;
 		console.log(storeObj)
-	db.DailyInfo.create(storeObj)
+	db.DailyInfo.save(storeObj)
 		}
 	});
 }
