@@ -2,9 +2,8 @@
   "name": "project2",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
-  "directories": {
-    "test": "tests"
+  "scripts": {
+  "start": "node server.js" 
   },
   "keywords": [],
   "author": "",
@@ -17,6 +16,7 @@
     "browserify": "^13.1.1",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
+    "cron": "^1.2.1",
     "ejs": "^2.5.5",
     "express": "^4.14.0",
     "express-session": "^1.14.2",
@@ -33,6 +33,7 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "request": "^2.79.0",
+    "time": "^0.11.4",
     "unirest": "^0.5.1"
   }
 }
