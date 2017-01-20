@@ -91,9 +91,6 @@ function getCsv(url,callback){
 function babyParseFunc (url,which) { 
 	getCsv(url,function(res){
 	var parsed = Baby.parse(res).data;
-	console.log(parsed)
-	
-	
 		if(which=='shift'){
 		storeObj.shift=parsed;
 		console.log(typeof storeObj.shift)
@@ -111,13 +108,9 @@ function babyParseFunc (url,which) {
 
 
 function getHedoData(callback){
-
 	babyParseFunc(getShift,'shift') //babyfunc -> getCsv = returned
 	babyParseFunc(getMetashift,'meta')
-	console.log('in getHedoData',date,storeObj.shift);
-
 }
-getHedoData();
 
 /*********************** SERVER ******************************/
 app.listen(process.env.PORT || 3000, function() {
