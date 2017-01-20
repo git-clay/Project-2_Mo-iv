@@ -50,8 +50,6 @@ app.use(routes);
 
 /*********************** Daily api call  ******************************/
 
-var shiftRes,
-	metashiftRes;
 
 var date 	= new Date(),
 	dd 		= date.getDate()-1,
@@ -69,7 +67,6 @@ var apiCall = schedule.scheduleJob(rule,function(){
 	console.log('ran', date)
 	getHedoData();
 });
-
 // console.log('date:',date,'rule:',rule,'schedule',schedule)
 
 if(dd<10) {dd='0'+dd;} 
@@ -101,7 +98,7 @@ function babyParseFunc (url,which) {
 	if(storeObj.shift!== undefined &&storeObj.meta!== undefined){
 	storeObj.date = date;
 		console.log(storeObj)
-	db.DailyInfo.save(storeObj)
+	db.DailyInfo.create(storeObj)
 		}
 	});
 }
