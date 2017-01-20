@@ -6,16 +6,9 @@
   "directories": {
     "test": "tests"
   },
-  "scripts": {
-    "start" : "node server.js"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^3.2.0"
-  },
   "dependencies": {
     "babyparse": "^0.4.6",
     "bcrypt": "^1.0.1",
