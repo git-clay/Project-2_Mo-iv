@@ -21,6 +21,9 @@ img{
 #graph{
 	height:200px;
 }
+#graph2{
+	height:200px;
+}
 .panel{
 	opacity: .8;
 	background: linear-gradient(140deg, #1b2f74, #467c9b);
