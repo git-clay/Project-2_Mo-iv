@@ -6,7 +6,6 @@ var express = require('express'),
 	userController = require('../controllers/userController.js'),
 	staticController = require('../controllers/static.js'),
 	dailyController = require('../controllers/dailyController.js');
-
 function authenticatedUser(req,res,next){
 	console.log(next);
 	if(req.isAuthenticated()) return next();
