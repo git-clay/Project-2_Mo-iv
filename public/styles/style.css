@@ -18,13 +18,12 @@ h2{
 img{
 	opacity: .45;
 }
+.googleGraph{
+	opacity: .65;
+	height: 200px;
+	border-radius: 20px;
+}
 
-#graph{
-	height:200px;
-}
-#graph2{
-	height:200px;
-}
 .panel{
 	opacity: .8;
 	background: linear-gradient(140deg, #1b2f74, #467c9b);
@@ -38,17 +37,17 @@ img{
 	color: white;
 }
 
-form{
-	width:70%;
-}
+
 #alerBox{
 	display: none;
 }
 .checkbox{
+	padding: 40px;
 	background: #c0c6d9;
-	opacity: .6;
+	opacity: .8;
 	font-opacity: .9;
-	color: black
+	color: black;
+	border:4px lightgray solid;
 }
 .navbar{
 	background: linear-gradient(140deg, #c0c6d9, #a79f98);
