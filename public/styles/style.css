@@ -45,8 +45,8 @@ img{
 .checkbox{
 	padding: 40px;
 	background: #c0c6d9;
-	opacity: .8;
-	font-opacity: .9;
+	opacity: .85;
+	font-opacity: .95;
 	color: black;
 	border:4px lightgray solid;
 }
@@ -57,12 +57,12 @@ a{
 	color:#BB76FF;
 }
 body.modal-open div.modal-backdrop {
-    z-index: 0;
+    z-index: 1;
 }
 div.modal-body{
-	max-height: 420px;
-    overflow-y: auto;
+	max-height: 400px;
+    overflow: auto;
 }
 #myModal{
-	position: relative;
+	position: fixed;
 }

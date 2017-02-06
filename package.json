@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-  "start": "node server.js" 
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +17,7 @@
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
     "cron": "^1.2.1",
+    "dotenv": "^4.0.0",
     "ejs": "^2.5.5",
     "express": "^4.14.0",
     "express-session": "^1.14.2",

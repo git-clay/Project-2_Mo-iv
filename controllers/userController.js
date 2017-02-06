@@ -5,11 +5,11 @@ var db = require('../models');
 var unirest = require('unirest');
 var count=1;
 var resultObj=[]; 
-
+var mashapeKey= process.env.mashapeKey
 /**************** sends request to api (element is the phrase being sent) ******************************/
 var sentApi = function(element,i,callback){ //sentiment api analysis 
 	unirest.post("https://twinword-sentiment-analysis.p.mashape.com/analyze/")
-	.header("X-Mashape-Key", "EiFKUp9ROymshrUthQlrkwSWWM7lp1OsBRCjsno44Cct6gKP8V")
+	.header("X-Mashape-Key", mashapeKey)
 	.header("Content-Type", "application/x-www-form-urlencoded")
 	.header("Accept", "application/json")
 	.send("text="+element)
@@ -28,7 +28,7 @@ function getRegister(req, res) {
 function postRegister(req, res) {
 	console.log('post register!');
 	var registerStrategy = passport.authenticate('local-signup', {
-		successRedirect	: '/',
+		successRedirect	: '/questionaire',
 		failureRedirect	: '/register',
 		failureFlash	: true
 	});
@@ -49,7 +49,7 @@ function getLogin(req, res) {
 /*********************** POST LOGIN ******************************/
 function postLogin(req, res,next) {
 		var loginStrategy = passport.authenticate('local-login', {
-		successRedirect	: '/',
+		successRedirect	: '/questionaire',
 		failureRedirect	: '/login',
 		failureFlash	: true
 	});
@@ -80,6 +80,7 @@ function postQuestionaire(req,res) {
 			resultObj.push({q:i+1,type:curObj.type,score:curObj.score,key:curObj.keywords});
 			console.log(count, ele.length);
 			if(count==ele.length){	//when on the last element
+				count=0;
 				//save resultObj to user
 				console.log(resultObj);
 				// console.log(resultObj[0].key);
@@ -91,6 +92,7 @@ function postQuestionaire(req,res) {
 
 				res.locals.currentUser.save(function(err,stuff){	//save to user
 				console.log("new user: "+res.locals.currentUser);
+				resultObj=[]
 				res.json(res.locals.currentUser);
 				});
 			}

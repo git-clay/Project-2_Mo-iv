@@ -12,6 +12,8 @@ var express 	= require('express'),
 	// Papa	= require('papaparse')
 	httpRequest = require('request'),
 	Baby	= require('babyparse');
+	require('dotenv').config();
+
 	app.use(morgan('dev'));
 	app.use(cookieParser());
 	app.use(bodyParser.urlencoded({extended:true}));
@@ -22,7 +24,6 @@ var express 	= require('express'),
 
 var db = require('./models');
 app.use(express.static('public'));
-
 // console.log(process.env)
 
 
