@@ -4,29 +4,28 @@
 <h1 class="text-center">Register</h1><br>
 
 <!-- User creates account-->
-<section class="col-xs-offset-0 col-sm-offset-1 checkbox col-md-offset-3 col-md-6">
+<section class="col-sm-offset-2 col-sm-8 checkbox col-md-offset-4 col-md-4">
 <form class="form-horizontal" method="post" action="/users" id="registerAccount" autocomplete="false">
   <div class="form-group">
-    <label for="inputName" class="col-sm-2 control-label">Name</label>
-    <div class="col-xs-9 col-md-8">
+ 
+    <div class="col-xs-10 col-xs-offset-1 ">
       <input type="text" class="form-control" name="name" placeholder="Name">
     </div>
   </div>
   <div class="form-group">
-    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-    <div class="col-xs-9 col-md-8">
+    
+    <div class="col-xs-10 col-xs-offset-1">
       <input type="email" class="form-control" name="email" placeholder="Email" autocomplete="false">
     </div>
   </div>
   <div class="form-group">
-    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-    <div class="col-xs-9 col-md-8">
+    <div class="col-xs-10 col-xs-offset-1">
       <input type="password" name="password" class="form-control" placeholder="Password">
     </div>
   </div>
   <br>
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-12 col-md-10">
+    <div class="col-xs-10 col-xs-offset-1">
       <div >
       <h4>Motivation categories <small>Select up to 3</small></h4>
     <label class="col-xs-10 col-sm-6"> <input name="goals" type="checkbox" value="Exercise"> Exercise</label>
@@ -37,13 +36,13 @@
 		<label class="col-xs-10 col-sm-6"> <input name="goals" type="checkbox" value="Post more Memes"> Post more Memes </label>
 		<label class="col-xs-10 col-sm-6"> <input name="goals" type="checkbox" value="charity work"> Charity Work </label>
 		<label class="col-xs-10 col-sm-6"> <input name="goals" type="checkbox" value="Code like a ninja"> Code like a ninja </label>
-		<label class="col-xs-10 col-sm-6"> <input name="goals" type="checkbox" onclick="if(this.checked){ document.getElementById('other').focus();}"> Other <input type="text" id="other" name="other" /> </label>
+		<label class="col-xs-12 col-sm-12"> <input name="goals" type="checkbox" onclick="if(this.checked){ document.getElementById('other').focus();}"> Other <input class="" type="text" id="other" name="other" /> </label>
         
       </div>
     </div>
   </div>
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="col-xs-12 text-center">
       <button type="submit" value="submit" class="btn btn-success">Register</button>
     </div>
   </div>
