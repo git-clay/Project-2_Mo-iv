@@ -12,8 +12,6 @@ var express 	= require('express'),
 	// Papa	= require('papaparse')
 	httpRequest = require('request'),
 	Baby	= require('babyparse');
-	app.use(express.static(__dirname+'/public'));
-
 	app.use(morgan('dev'));
 	app.use(cookieParser());
 	app.use(bodyParser.urlencoded({extended:true}));
@@ -23,12 +21,13 @@ var express 	= require('express'),
 /*********************** DATABASE ******************************/
 
 var db = require('./models');
+app.use(express.static('public'));
 
 // console.log(process.env)
 
 
 /*********************** VIEWS ******************************/
-app.set('views', 'views');
+app.set('views', './views');
 app.engine('ejs', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 
@@ -114,4 +113,3 @@ function getHedoData(){
 app.listen(process.env.PORT || 3000, function() {
 	console.log('BOOM, Express is firing on all cylinders');
 });
-
