@@ -48,7 +48,7 @@ function babyParseFunc (thisUrl,which) {
 		}
 	if(storeObj.shift!== undefined &&storeObj.meta!== undefined){
 	storeObj.date = date;
-		console.log(storeObj)
+		console.log(storeObj,db.DailyInfo)
 	db.DailyInfo.create(storeObj)
 			process.exit();
 		}
