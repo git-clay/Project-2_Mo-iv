@@ -50,9 +50,11 @@ function babyParseFunc (thisUrl,which) {
 	storeObj.date = date;
 		console.log(storeObj,db.DailyInfo)
 	db.DailyInfo.create(storeObj)
-	
+
 			// process.exit();
 		}
+		process.exit();
+
 	});
 }
 
