@@ -9,7 +9,9 @@ var express 	= require('express'),
 	mongoose.createConnection(process.env.MONGODB_URI ||process.env.MONGOLAB_URI||
 	process.env.MONGOHQ_URL);
 
-var db = require('../models');
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
+var db = require(__dirname+'/models');
 console.log('working...')
 var date 	= new Date(),
 	dd 		= date.getDate()-1,  //yesterdays info
