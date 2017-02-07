@@ -34,8 +34,8 @@ function getCsv(url,callback){
 	})
 }
 
-function babyParseFunc (url,which) { 
-	getCsv(url,function(res){
+function babyParseFunc (thisUrl,which) { 
+	getCsv(thisUrl,function(res){
 	var parsed = Baby.parse(res).data;
 		if(which=='shift'){
 		storeObj.shift=parsed;
