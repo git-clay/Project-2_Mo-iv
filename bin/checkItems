@@ -1,3 +1,4 @@
+#!/app/bin node
 var express 	= require('express'),
 	app 		= express(),	
 	bodyParser	= require('body-parser'),
