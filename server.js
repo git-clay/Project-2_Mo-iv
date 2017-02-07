@@ -109,7 +109,7 @@ function getHedoData(){
 	babyParseFunc(getShift,'shift') //babyfunc -> getCsv = returned
 	babyParseFunc(getMetashift,'meta')
 }
-getHedoData();
+// getHedoData();
 /*********************** SERVER ******************************/
 app.listen(process.env.PORT || 3000, function() {
 	console.log('BOOM, Express is firing on all cylinders');
