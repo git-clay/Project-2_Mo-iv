@@ -11,7 +11,7 @@ var express 	= require('express'),
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
-var db = require(__dirname+'/models');
+var db = require('../models');
 console.log('working...')
 var date 	= new Date(),
 	dd 		= date.getDate()-1,  //yesterdays info
