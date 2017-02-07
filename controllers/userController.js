@@ -70,28 +70,28 @@ function getQuestionaire(req,res) {
 
 /*********************** POST QUESTIONAIRE ******************************/
 function postQuestionaire(req,res) {
-	console.log(req.body); //object from front end form(questionaire responses)
+	// console.log(req.body); //object from front end form(questionaire responses)
 	var ele = [req.body.q1,req.body.q2,req.body.q3,req.body.q4];
 	
 	for(var i = 0; i<ele.length;i++){
 		sentApi(ele[i],i,function(result,i,element){ //the callback function is all the magic to obtain info as it comes back from api
 			var curObj = result.body;
-			console.log(curObj);
+			// console.log(curObj);
 			resultObj.push({q:i+1,type:curObj.type,score:curObj.score,key:curObj.keywords});
-			console.log(count, ele.length);
+			// console.log(count, ele.length);
 			if(count==ele.length){	//when on the last element
 				count=0;
 				//save resultObj to user
-				console.log(resultObj);
+				// console.log(resultObj);
 				// console.log(resultObj[0].key);
-				console.log(resultObj[1].key[0]);
-				console.log(resultObj[1].q);
-				console.log(res.locals.currentUser);
+				// console.log(resultObj[1].key[0]);
+				// console.log(resultObj[1].q);
+				// console.log(res.locals.currentUser);
 				// res.locals.currentUser.qOne.push(resultObj);
 				res.locals.currentUser.qTwo.push(resultObj); //saved as array of objects (each object is the question score and words)
 
 				res.locals.currentUser.save(function(err,stuff){	//save to user
-				console.log("new user: "+res.locals.currentUser);
+				// console.log("new user: "+res.locals.currentUser);
 				resultObj=[]
 				res.json(res.locals.currentUser);
 				});
