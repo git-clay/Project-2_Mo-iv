@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ajax-request": "^1.2.1",
     "babyparse": "^0.4.6",
     "bcrypt": "^1.0.1",
     "bcrypt-nodejs": "0.0.3",

@@ -1,18 +1,17 @@
-#!/usr/bin/env node
+#! /app/bin/node
 var express 	= require('express'),
 	app 		= express(),	
 	bodyParser	= require('body-parser'),
 	httpRequest = require('request'),
 	Baby	= require('babyparse'),
 	mongoose = require('mongoose');
-	mongoose.Promise = global.Promise,
-	mongoose.createConnection(process.env.MONGODB_URI ||process.env.MONGOLAB_URI||
-	process.env.MONGOHQ_URL);
+	mongoose.Promise = global.Promise;
+	
+
+var db = require('../models');
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
-var db = require('../models');
-console.log('working...')
 var date 	= new Date(),
 	dd 		= date.getDate()-1,  //yesterdays info
 	mm 		= date.getMonth()+1,
@@ -21,13 +20,16 @@ var date 	= new Date(),
 	shift 	= '-shift.csv',
 	metashift = '-metashift.csv';
 
-
+if(dd<10) {dd='0'+dd;} 
+if(mm<10) {mm='0'+mm;} 
+date =	yyyy+'-'+ mm +'-'+dd;
 var getShift = url+date+shift,
 	getMetashift = url+date+metashift,
 	storeObj={};
 
-function getCsv(url,callback){
-	httpRequest.get(url, function (err, res, body) {
+function getCsv(thisUrl,callback){
+	console.log('getCsv')
+	httpRequest.get(thisUrl, function (err, res, body) {
 	    if (!err && res.statusCode == 200) {
 	        callback(body);
 	    }
@@ -35,6 +37,7 @@ function getCsv(url,callback){
 }
 
 function babyParseFunc (thisUrl,which) { 
+	console.log('babyParseFunc')
 	getCsv(thisUrl,function(res){
 	var parsed = Baby.parse(res).data;
 		if(which=='shift'){
@@ -54,6 +57,7 @@ function babyParseFunc (thisUrl,which) {
 }
 
 function getHedoData(){
+	console.log('hedo')
 	babyParseFunc(getShift,'shift') //babyfunc -> getCsv = returned
 	babyParseFunc(getMetashift,'meta')
 }
