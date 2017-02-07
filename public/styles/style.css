@@ -67,3 +67,9 @@ div.modal-body{
 #myModal{
 	position: fixed;
 }
+
+.pull-down{
+	vertical-align: bottom;
+	position: relative;
+	top: 160px;
+}
